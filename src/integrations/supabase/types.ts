@@ -10,511 +10,439 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "13.0.5"
+    PostgrestVersion: "13.0.4"
   }
   public: {
     Tables: {
-      activity_log: {
+      contacts: {
         Row: {
-          action: string
-          created_at: string
-          entity_id: string | null
-          entity_type: string
+          company_name: string | null
+          contact_name: string
+          contact_owner: string | null
+          contact_source: string | null
+          created_by: string | null
+          created_time: string | null
+          description: string | null
+          email: string | null
           id: string
-          metadata: Json | null
-          new_value: Json | null
-          old_value: Json | null
-          user_id: string
+          industry: string | null
+          linkedin: string | null
+          modified_by: string | null
+          modified_time: string | null
+          phone_no: string | null
+          position: string | null
+          region: string | null
+          website: string | null
         }
         Insert: {
-          action: string
-          created_at?: string
-          entity_id?: string | null
-          entity_type: string
+          company_name?: string | null
+          contact_name: string
+          contact_owner?: string | null
+          contact_source?: string | null
+          created_by?: string | null
+          created_time?: string | null
+          description?: string | null
+          email?: string | null
           id?: string
-          metadata?: Json | null
-          new_value?: Json | null
-          old_value?: Json | null
-          user_id: string
+          industry?: string | null
+          linkedin?: string | null
+          modified_by?: string | null
+          modified_time?: string | null
+          phone_no?: string | null
+          position?: string | null
+          region?: string | null
+          website?: string | null
         }
         Update: {
-          action?: string
-          created_at?: string
-          entity_id?: string | null
-          entity_type?: string
+          company_name?: string | null
+          contact_name?: string
+          contact_owner?: string | null
+          contact_source?: string | null
+          created_by?: string | null
+          created_time?: string | null
+          description?: string | null
+          email?: string | null
           id?: string
-          metadata?: Json | null
-          new_value?: Json | null
-          old_value?: Json | null
-          user_id?: string
+          industry?: string | null
+          linkedin?: string | null
+          modified_by?: string | null
+          modified_time?: string | null
+          phone_no?: string | null
+          position?: string | null
+          region?: string | null
+          website?: string | null
         }
         Relationships: []
       }
-      approval_audit_logs: {
+      dashboard_preferences: {
         Row: {
-          action: string
-          approver_comment: string | null
-          approver_id: string
-          created_at: string
-          employee_comment: string | null
-          id: string
-          metadata: Json | null
-          new_status: string | null
-          previous_status: string | null
-          rating_id: string
-        }
-        Insert: {
-          action: string
-          approver_comment?: string | null
-          approver_id: string
-          created_at?: string
-          employee_comment?: string | null
-          id?: string
-          metadata?: Json | null
-          new_status?: string | null
-          previous_status?: string | null
-          rating_id: string
-        }
-        Update: {
-          action?: string
-          approver_comment?: string | null
-          approver_id?: string
-          created_at?: string
-          employee_comment?: string | null
-          id?: string
-          metadata?: Json | null
-          new_status?: string | null
-          previous_status?: string | null
-          rating_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "approval_audit_logs_rating_id_fkey"
-            columns: ["rating_id"]
-            isOneToOne: false
-            referencedRelation: "employee_ratings"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      approval_history: {
-        Row: {
-          action: string
-          approver_id: string
-          comment: string | null
-          created_at: string
-          id: string
-          new_rating: string | null
-          previous_rating: string | null
-          rating_history_id: string
-        }
-        Insert: {
-          action: string
-          approver_id: string
-          comment?: string | null
-          created_at?: string
-          id?: string
-          new_rating?: string | null
-          previous_rating?: string | null
-          rating_history_id: string
-        }
-        Update: {
-          action?: string
-          approver_id?: string
-          comment?: string | null
-          created_at?: string
-          id?: string
-          new_rating?: string | null
-          previous_rating?: string | null
-          rating_history_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "approval_history_rating_history_id_fkey"
-            columns: ["rating_history_id"]
-            isOneToOne: false
-            referencedRelation: "skill_rating_history"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      approval_logs: {
-        Row: {
-          action: string
-          approver_comment: string | null
-          approver_id: string
+          card_order: Json | null
           created_at: string | null
-          employee_comment: string | null
           id: string
-          new_rating: string | null
-          previous_rating: string | null
-          rating_id: string
+          layout_view: string | null
+          updated_at: string | null
+          user_id: string
+          visible_widgets: Json | null
         }
         Insert: {
-          action: string
-          approver_comment?: string | null
-          approver_id: string
+          card_order?: Json | null
           created_at?: string | null
-          employee_comment?: string | null
           id?: string
-          new_rating?: string | null
-          previous_rating?: string | null
-          rating_id: string
+          layout_view?: string | null
+          updated_at?: string | null
+          user_id: string
+          visible_widgets?: Json | null
         }
         Update: {
-          action?: string
-          approver_comment?: string | null
-          approver_id?: string
+          card_order?: Json | null
           created_at?: string | null
-          employee_comment?: string | null
           id?: string
-          new_rating?: string | null
-          previous_rating?: string | null
-          rating_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "approval_logs_rating_id_fkey"
-            columns: ["rating_id"]
-            isOneToOne: false
-            referencedRelation: "employee_ratings"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      backup_history: {
-        Row: {
-          backup_name: string
-          backup_type: string
-          created_at: string
-          created_by: string
-          file_size: number
-          id: string
-          metadata: Json | null
-          record_count: number
-          storage_path: string | null
-          table_count: number
-        }
-        Insert: {
-          backup_name: string
-          backup_type: string
-          created_at?: string
-          created_by: string
-          file_size: number
-          id?: string
-          metadata?: Json | null
-          record_count: number
-          storage_path?: string | null
-          table_count: number
-        }
-        Update: {
-          backup_name?: string
-          backup_type?: string
-          created_at?: string
-          created_by?: string
-          file_size?: number
-          id?: string
-          metadata?: Json | null
-          record_count?: number
-          storage_path?: string | null
-          table_count?: number
+          layout_view?: string | null
+          updated_at?: string | null
+          user_id?: string
+          visible_widgets?: Json | null
         }
         Relationships: []
       }
-      employee_ratings: {
+      deal_action_items: {
         Row: {
-          approved_at: string | null
-          approved_by: string | null
-          approver_comment: string | null
+          assigned_to: string | null
           created_at: string
+          created_by: string | null
+          deal_id: string
+          due_date: string | null
           id: string
-          na_status: boolean | null
-          next_upgrade_date: string | null
-          rating: string
-          self_comment: string | null
-          skill_id: string
+          next_action: string
           status: string
-          submitted_at: string | null
-          subskill_id: string | null
           updated_at: string
-          user_id: string
         }
         Insert: {
-          approved_at?: string | null
-          approved_by?: string | null
-          approver_comment?: string | null
+          assigned_to?: string | null
           created_at?: string
+          created_by?: string | null
+          deal_id: string
+          due_date?: string | null
           id?: string
-          na_status?: boolean | null
-          next_upgrade_date?: string | null
-          rating: string
-          self_comment?: string | null
-          skill_id: string
+          next_action: string
           status?: string
-          submitted_at?: string | null
-          subskill_id?: string | null
           updated_at?: string
-          user_id: string
         }
         Update: {
-          approved_at?: string | null
-          approved_by?: string | null
-          approver_comment?: string | null
+          assigned_to?: string | null
           created_at?: string
+          created_by?: string | null
+          deal_id?: string
+          due_date?: string | null
           id?: string
-          na_status?: boolean | null
-          next_upgrade_date?: string | null
-          rating?: string
-          self_comment?: string | null
-          skill_id?: string
+          next_action?: string
           status?: string
-          submitted_at?: string | null
-          subskill_id?: string | null
           updated_at?: string
-          user_id?: string
         }
         Relationships: [
           {
-            foreignKeyName: "employee_ratings_skill_id_fkey"
-            columns: ["skill_id"]
+            foreignKeyName: "deal_action_items_deal_id_fkey"
+            columns: ["deal_id"]
             isOneToOne: false
-            referencedRelation: "skills"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "employee_ratings_subskill_id_fkey"
-            columns: ["subskill_id"]
-            isOneToOne: false
-            referencedRelation: "subskills"
+            referencedRelation: "deals"
             referencedColumns: ["id"]
           },
         ]
       }
-      goal_progress_history: {
+      deals: {
         Row: {
-          created_at: string
-          goal_id: string
+          action_items: string | null
+          budget: string | null
+          business_value: string | null
+          closing: string | null
+          created_at: string | null
+          created_by: string
+          currency_type: string | null
+          current_status: string | null
+          customer_challenges: string | null
+          customer_name: string | null
+          customer_need: string | null
+          deal_name: string
+          decision_maker_level: string | null
+          drop_reason: string | null
+          end_date: string | null
+          expected_closing_date: string | null
+          handoff_status: string | null
           id: string
-          milestone_reached: string | null
-          new_rating: string
-          notes: string | null
-          previous_rating: string | null
-          progress_percentage: number
+          implementation_start_date: string | null
+          internal_comment: string | null
+          is_recurring: string | null
+          lead_name: string | null
+          lead_owner: string | null
+          lost_reason: string | null
+          modified_at: string | null
+          modified_by: string | null
+          need_improvement: string | null
+          priority: number | null
+          probability: number | null
+          project_duration: number | null
+          project_name: string | null
+          proposal_due_date: string | null
+          quarterly_revenue_q1: number | null
+          quarterly_revenue_q2: number | null
+          quarterly_revenue_q3: number | null
+          quarterly_revenue_q4: number | null
+          region: string | null
+          relationship_strength: string | null
+          rfq_received_date: string | null
+          rfq_status: string | null
+          signed_contract_date: string | null
+          stage: string
+          start_date: string | null
+          total_contract_value: number | null
+          total_revenue: number | null
+          won_reason: string | null
         }
         Insert: {
-          created_at?: string
-          goal_id: string
+          action_items?: string | null
+          budget?: string | null
+          business_value?: string | null
+          closing?: string | null
+          created_at?: string | null
+          created_by: string
+          currency_type?: string | null
+          current_status?: string | null
+          customer_challenges?: string | null
+          customer_name?: string | null
+          customer_need?: string | null
+          deal_name: string
+          decision_maker_level?: string | null
+          drop_reason?: string | null
+          end_date?: string | null
+          expected_closing_date?: string | null
+          handoff_status?: string | null
           id?: string
-          milestone_reached?: string | null
-          new_rating: string
-          notes?: string | null
-          previous_rating?: string | null
-          progress_percentage: number
+          implementation_start_date?: string | null
+          internal_comment?: string | null
+          is_recurring?: string | null
+          lead_name?: string | null
+          lead_owner?: string | null
+          lost_reason?: string | null
+          modified_at?: string | null
+          modified_by?: string | null
+          need_improvement?: string | null
+          priority?: number | null
+          probability?: number | null
+          project_duration?: number | null
+          project_name?: string | null
+          proposal_due_date?: string | null
+          quarterly_revenue_q1?: number | null
+          quarterly_revenue_q2?: number | null
+          quarterly_revenue_q3?: number | null
+          quarterly_revenue_q4?: number | null
+          region?: string | null
+          relationship_strength?: string | null
+          rfq_received_date?: string | null
+          rfq_status?: string | null
+          signed_contract_date?: string | null
+          stage?: string
+          start_date?: string | null
+          total_contract_value?: number | null
+          total_revenue?: number | null
+          won_reason?: string | null
         }
         Update: {
-          created_at?: string
-          goal_id?: string
+          action_items?: string | null
+          budget?: string | null
+          business_value?: string | null
+          closing?: string | null
+          created_at?: string | null
+          created_by?: string
+          currency_type?: string | null
+          current_status?: string | null
+          customer_challenges?: string | null
+          customer_name?: string | null
+          customer_need?: string | null
+          deal_name?: string
+          decision_maker_level?: string | null
+          drop_reason?: string | null
+          end_date?: string | null
+          expected_closing_date?: string | null
+          handoff_status?: string | null
           id?: string
-          milestone_reached?: string | null
-          new_rating?: string
-          notes?: string | null
-          previous_rating?: string | null
-          progress_percentage?: number
+          implementation_start_date?: string | null
+          internal_comment?: string | null
+          is_recurring?: string | null
+          lead_name?: string | null
+          lead_owner?: string | null
+          lost_reason?: string | null
+          modified_at?: string | null
+          modified_by?: string | null
+          need_improvement?: string | null
+          priority?: number | null
+          probability?: number | null
+          project_duration?: number | null
+          project_name?: string | null
+          proposal_due_date?: string | null
+          quarterly_revenue_q1?: number | null
+          quarterly_revenue_q2?: number | null
+          quarterly_revenue_q3?: number | null
+          quarterly_revenue_q4?: number | null
+          region?: string | null
+          relationship_strength?: string | null
+          rfq_received_date?: string | null
+          rfq_status?: string | null
+          signed_contract_date?: string | null
+          stage?: string
+          start_date?: string | null
+          total_contract_value?: number | null
+          total_revenue?: number | null
+          won_reason?: string | null
         }
         Relationships: []
       }
-      import_export_logs: {
+      keep_alive: {
         Row: {
-          action: string
+          "Able to read DB": string | null
           created_at: string
-          details: Json | null
-          entity_name: string
-          entity_type: string
-          id: string
-          log_level: string
-          operation_type: string
-          user_id: string
+          id: number
         }
         Insert: {
-          action: string
+          "Able to read DB"?: string | null
           created_at?: string
-          details?: Json | null
-          entity_name: string
-          entity_type: string
-          id?: string
-          log_level: string
-          operation_type: string
-          user_id: string
+          id?: number
         }
         Update: {
-          action?: string
+          "Able to read DB"?: string | null
           created_at?: string
-          details?: Json | null
-          entity_name?: string
-          entity_type?: string
-          id?: string
-          log_level?: string
-          operation_type?: string
-          user_id?: string
+          id?: number
         }
         Relationships: []
       }
-      leaderboard_history: {
+      lead_action_items: {
         Row: {
+          assigned_to: string | null
           created_at: string
+          created_by: string | null
+          due_date: string | null
           id: string
-          rank_position: number
-          total_xp: number
-          user_id: string
-          week_start_date: string
+          lead_id: string
+          next_action: string
+          status: string
+          updated_at: string
         }
         Insert: {
+          assigned_to?: string | null
           created_at?: string
+          created_by?: string | null
+          due_date?: string | null
           id?: string
-          rank_position: number
-          total_xp: number
-          user_id: string
-          week_start_date: string
+          lead_id: string
+          next_action: string
+          status?: string
+          updated_at?: string
         }
         Update: {
+          assigned_to?: string | null
           created_at?: string
+          created_by?: string | null
+          due_date?: string | null
           id?: string
-          rank_position?: number
-          total_xp?: number
-          user_id?: string
-          week_start_date?: string
+          lead_id?: string
+          next_action?: string
+          status?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      leads: {
+        Row: {
+          company_name: string | null
+          contact_owner: string | null
+          contact_source: string | null
+          country: string | null
+          created_by: string | null
+          created_time: string | null
+          description: string | null
+          email: string | null
+          id: string
+          industry: string | null
+          lead_name: string
+          lead_status: string | null
+          linkedin: string | null
+          modified_by: string | null
+          modified_time: string | null
+          phone_no: string | null
+          position: string | null
+          website: string | null
+        }
+        Insert: {
+          company_name?: string | null
+          contact_owner?: string | null
+          contact_source?: string | null
+          country?: string | null
+          created_by?: string | null
+          created_time?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          industry?: string | null
+          lead_name: string
+          lead_status?: string | null
+          linkedin?: string | null
+          modified_by?: string | null
+          modified_time?: string | null
+          phone_no?: string | null
+          position?: string | null
+          website?: string | null
+        }
+        Update: {
+          company_name?: string | null
+          contact_owner?: string | null
+          contact_source?: string | null
+          country?: string | null
+          created_by?: string | null
+          created_time?: string | null
+          description?: string | null
+          email?: string | null
+          id?: string
+          industry?: string | null
+          lead_name?: string
+          lead_status?: string | null
+          linkedin?: string | null
+          modified_by?: string | null
+          modified_time?: string | null
+          phone_no?: string | null
+          position?: string | null
+          website?: string | null
         }
         Relationships: []
       }
       notifications: {
         Row: {
+          action_item_id: string | null
           created_at: string
           id: string
+          lead_id: string | null
           message: string
-          read: boolean
-          title: string
-          type: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          message: string
-          read?: boolean
-          title: string
-          type?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          message?: string
-          read?: boolean
-          title?: string
-          type?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      page_access: {
-        Row: {
-          has_access: boolean
-          id: string
-          page_id: string
-          role_name: string
-          updated_at: string | null
-        }
-        Insert: {
-          has_access?: boolean
-          id?: string
-          page_id: string
-          role_name: string
-          updated_at?: string | null
-        }
-        Update: {
-          has_access?: boolean
-          id?: string
-          page_id?: string
-          role_name?: string
-          updated_at?: string | null
-        }
-        Relationships: [
-          {
-            foreignKeyName: "page_access_page_id_fkey"
-            columns: ["page_id"]
-            isOneToOne: false
-            referencedRelation: "pages"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      pages: {
-        Row: {
-          created_at: string | null
-          description: string | null
-          id: string
-          name: string
-          route: string
-          updated_at: string | null
-        }
-        Insert: {
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          name: string
-          route: string
-          updated_at?: string | null
-        }
-        Update: {
-          created_at?: string | null
-          description?: string | null
-          id?: string
-          name?: string
-          route?: string
-          updated_at?: string | null
-        }
-        Relationships: []
-      }
-      personal_goals: {
-        Row: {
-          completed_at: string | null
-          created_at: string
-          current_rating: string | null
-          id: string
-          motivation_notes: string | null
-          progress_percentage: number | null
-          skill_id: string
+          notification_type: string
           status: string
-          target_date: string
-          target_rating: string
           updated_at: string
           user_id: string
         }
         Insert: {
-          completed_at?: string | null
+          action_item_id?: string | null
           created_at?: string
-          current_rating?: string | null
           id?: string
-          motivation_notes?: string | null
-          progress_percentage?: number | null
-          skill_id: string
+          lead_id?: string | null
+          message: string
+          notification_type?: string
           status?: string
-          target_date: string
-          target_rating: string
           updated_at?: string
           user_id: string
         }
         Update: {
-          completed_at?: string | null
+          action_item_id?: string | null
           created_at?: string
-          current_rating?: string | null
           id?: string
-          motivation_notes?: string | null
-          progress_percentage?: number | null
-          skill_id?: string
+          lead_id?: string | null
+          message?: string
+          notification_type?: string
           status?: string
-          target_date?: string
-          target_rating?: string
           updated_at?: string
           user_id?: string
         }
@@ -522,684 +450,202 @@ export type Database = {
       }
       profiles: {
         Row: {
-          created_at: string
-          department: string | null
-          email: string
-          full_name: string
+          created_at: string | null
+          "Email ID": string | null
+          full_name: string | null
           id: string
-          last_login: string | null
-          role: string
-          status: string | null
-          tech_lead_id: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          "Email ID"?: string | null
+          full_name?: string | null
+          id: string
+          updated_at?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          "Email ID"?: string | null
+          full_name?: string | null
+          id?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      saved_filters: {
+        Row: {
+          created_at: string
+          filter_type: string
+          filters: Json
+          id: string
+          name: string
           updated_at: string
           user_id: string
         }
         Insert: {
           created_at?: string
-          department?: string | null
-          email: string
-          full_name: string
-          id?: string
-          last_login?: string | null
-          role?: string
-          status?: string | null
-          tech_lead_id?: string | null
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          department?: string | null
-          email?: string
-          full_name?: string
-          id?: string
-          last_login?: string | null
-          role?: string
-          status?: string | null
-          tech_lead_id?: string | null
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "profiles_tech_lead_id_fkey"
-            columns: ["tech_lead_id"]
-            isOneToOne: false
-            referencedRelation: "profiles"
-            referencedColumns: ["user_id"]
-          },
-        ]
-      }
-      project_assignments: {
-        Row: {
-          assigned_by: string
-          created_at: string
-          id: string
-          project_id: string
-          user_id: string
-        }
-        Insert: {
-          assigned_by: string
-          created_at?: string
-          id?: string
-          project_id: string
-          user_id: string
-        }
-        Update: {
-          assigned_by?: string
-          created_at?: string
-          id?: string
-          project_id?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "project_assignments_project_id_fkey"
-            columns: ["project_id"]
-            isOneToOne: false
-            referencedRelation: "projects"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      projects: {
-        Row: {
-          created_at: string
-          created_by: string
-          description: string | null
-          end_date: string | null
-          id: string
-          name: string
-          start_date: string | null
-          status: string
-          tech_lead_id: string | null
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          created_by: string
-          description?: string | null
-          end_date?: string | null
+          filter_type?: string
+          filters: Json
           id?: string
           name: string
-          start_date?: string | null
-          status?: string
-          tech_lead_id?: string | null
           updated_at?: string
+          user_id: string
         }
         Update: {
           created_at?: string
-          created_by?: string
-          description?: string | null
-          end_date?: string | null
+          filter_type?: string
+          filters?: Json
           id?: string
           name?: string
-          start_date?: string | null
-          status?: string
-          tech_lead_id?: string | null
-          updated_at?: string
-        }
-        Relationships: []
-      }
-      report_logs: {
-        Row: {
-          completed_at: string | null
-          created_at: string
-          error_message: string | null
-          execution_time_ms: number | null
-          file_path: string | null
-          filters: Json | null
-          generated_by: string
-          id: string
-          records_processed: number | null
-          report_name: string
-          report_type: string
-          status: string
-        }
-        Insert: {
-          completed_at?: string | null
-          created_at?: string
-          error_message?: string | null
-          execution_time_ms?: number | null
-          file_path?: string | null
-          filters?: Json | null
-          generated_by: string
-          id?: string
-          records_processed?: number | null
-          report_name: string
-          report_type: string
-          status?: string
-        }
-        Update: {
-          completed_at?: string | null
-          created_at?: string
-          error_message?: string | null
-          execution_time_ms?: number | null
-          file_path?: string | null
-          filters?: Json | null
-          generated_by?: string
-          id?: string
-          records_processed?: number | null
-          report_name?: string
-          report_type?: string
-          status?: string
-        }
-        Relationships: []
-      }
-      skill_categories: {
-        Row: {
-          color: string | null
-          created_at: string
-          description: string | null
-          id: string
-          name: string
-        }
-        Insert: {
-          color?: string | null
-          created_at?: string
-          description?: string | null
-          id?: string
-          name: string
-        }
-        Update: {
-          color?: string | null
-          created_at?: string
-          description?: string | null
-          id?: string
-          name?: string
-        }
-        Relationships: []
-      }
-      skill_explorer_presets: {
-        Row: {
-          created_at: string
-          id: string
-          preset_name: string
-          selections: Json
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          preset_name: string
-          selections: Json
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          preset_name?: string
-          selections?: Json
           updated_at?: string
           user_id?: string
         }
         Relationships: []
       }
-      skill_rating_history: {
+      security_audit_log: {
         Row: {
-          created_at: string
+          action: string
+          created_at: string | null
+          details: Json | null
           id: string
-          rated_by: string | null
-          rating: string
-          rating_comment: string | null
-          rating_type: string
-          skill_id: string
-          status: string
-          subskill_id: string | null
-          superseded_at: string | null
-          user_id: string
+          ip_address: unknown
+          resource_id: string | null
+          resource_type: string
+          user_agent: string | null
+          user_id: string | null
         }
         Insert: {
-          created_at?: string
+          action: string
+          created_at?: string | null
+          details?: Json | null
           id?: string
-          rated_by?: string | null
-          rating: string
-          rating_comment?: string | null
-          rating_type: string
-          skill_id: string
-          status?: string
-          subskill_id?: string | null
-          superseded_at?: string | null
-          user_id: string
+          ip_address?: unknown
+          resource_id?: string | null
+          resource_type: string
+          user_agent?: string | null
+          user_id?: string | null
         }
         Update: {
-          created_at?: string
+          action?: string
+          created_at?: string | null
+          details?: Json | null
           id?: string
-          rated_by?: string | null
-          rating?: string
-          rating_comment?: string | null
-          rating_type?: string
-          skill_id?: string
-          status?: string
-          subskill_id?: string | null
-          superseded_at?: string | null
-          user_id?: string
+          ip_address?: unknown
+          resource_id?: string | null
+          resource_type?: string
+          user_agent?: string | null
+          user_id?: string | null
         }
         Relationships: []
       }
-      skills: {
+      user_preferences: {
         Row: {
-          category_id: string
-          created_at: string
-          description: string | null
+          created_at: string | null
           id: string
-          name: string
-        }
-        Insert: {
-          category_id: string
-          created_at?: string
-          description?: string | null
-          id?: string
-          name: string
-        }
-        Update: {
-          category_id?: string
-          created_at?: string
-          description?: string | null
-          id?: string
-          name?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "skills_category_id_fkey"
-            columns: ["category_id"]
-            isOneToOne: false
-            referencedRelation: "skill_categories"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      subskill_rating_history: {
-        Row: {
-          approved_at: string | null
-          approved_by: string | null
-          approver_comment: string | null
-          archived_at: string
-          created_at: string
-          id: string
-          rating: string
-          self_comment: string | null
-          skill_id: string
-          status: string
-          subskill_id: string
+          theme: string | null
+          updated_at: string | null
           user_id: string
         }
         Insert: {
-          approved_at?: string | null
-          approved_by?: string | null
-          approver_comment?: string | null
-          archived_at?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          rating: string
-          self_comment?: string | null
-          skill_id: string
-          status: string
-          subskill_id: string
+          theme?: string | null
+          updated_at?: string | null
           user_id: string
         }
         Update: {
-          approved_at?: string | null
-          approved_by?: string | null
-          approver_comment?: string | null
-          archived_at?: string
-          created_at?: string
+          created_at?: string | null
           id?: string
-          rating?: string
-          self_comment?: string | null
-          skill_id?: string
-          status?: string
-          subskill_id?: string
-          user_id?: string
-        }
-        Relationships: []
-      }
-      subskills: {
-        Row: {
-          created_at: string
-          description: string | null
-          id: string
-          name: string
-          skill_id: string
-          updated_at: string
-        }
-        Insert: {
-          created_at?: string
-          description?: string | null
-          id?: string
-          name: string
-          skill_id: string
-          updated_at?: string
-        }
-        Update: {
-          created_at?: string
-          description?: string | null
-          id?: string
-          name?: string
-          skill_id?: string
-          updated_at?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "subskills_skill_id_fkey"
-            columns: ["skill_id"]
-            isOneToOne: false
-            referencedRelation: "skills"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      training_budgets: {
-        Row: {
-          allocated_budget: number
-          created_at: string
-          department: string | null
-          fiscal_year: number
-          id: string
-          updated_at: string
-          used_budget: number
-        }
-        Insert: {
-          allocated_budget?: number
-          created_at?: string
-          department?: string | null
-          fiscal_year: number
-          id?: string
-          updated_at?: string
-          used_budget?: number
-        }
-        Update: {
-          allocated_budget?: number
-          created_at?: string
-          department?: string | null
-          fiscal_year?: number
-          id?: string
-          updated_at?: string
-          used_budget?: number
-        }
-        Relationships: []
-      }
-      training_participation: {
-        Row: {
-          completion_date: string | null
-          cost: number | null
-          created_at: string
-          id: string
-          skill_category_id: string | null
-          start_date: string | null
-          status: string
-          training_name: string
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          completion_date?: string | null
-          cost?: number | null
-          created_at?: string
-          id?: string
-          skill_category_id?: string | null
-          start_date?: string | null
-          status?: string
-          training_name: string
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          completion_date?: string | null
-          cost?: number | null
-          created_at?: string
-          id?: string
-          skill_category_id?: string | null
-          start_date?: string | null
-          status?: string
-          training_name?: string
-          updated_at?: string
-          user_id?: string
-        }
-        Relationships: [
-          {
-            foreignKeyName: "training_participation_skill_category_id_fkey"
-            columns: ["skill_category_id"]
-            isOneToOne: false
-            referencedRelation: "skill_categories"
-            referencedColumns: ["id"]
-          },
-        ]
-      }
-      user_achievements: {
-        Row: {
-          achievement_name: string
-          achievement_type: string
-          badge_icon: string | null
-          description: string | null
-          earned_at: string
-          goal_id: string | null
-          id: string
-          metadata: Json | null
-          user_id: string
-        }
-        Insert: {
-          achievement_name: string
-          achievement_type: string
-          badge_icon?: string | null
-          description?: string | null
-          earned_at?: string
-          goal_id?: string | null
-          id?: string
-          metadata?: Json | null
-          user_id: string
-        }
-        Update: {
-          achievement_name?: string
-          achievement_type?: string
-          badge_icon?: string | null
-          description?: string | null
-          earned_at?: string
-          goal_id?: string | null
-          id?: string
-          metadata?: Json | null
-          user_id?: string
-        }
-        Relationships: []
-      }
-      user_category_preferences: {
-        Row: {
-          created_at: string
-          id: string
-          updated_at: string
-          user_id: string
-          visible_category_ids: string[]
-        }
-        Insert: {
-          created_at?: string
-          id?: string
-          updated_at?: string
-          user_id: string
-          visible_category_ids?: string[]
-        }
-        Update: {
-          created_at?: string
-          id?: string
-          updated_at?: string
-          user_id?: string
-          visible_category_ids?: string[]
-        }
-        Relationships: []
-      }
-      user_gamification: {
-        Row: {
-          best_streak: number | null
-          created_at: string
-          current_streak: number | null
-          goals_achieved_count: number | null
-          goals_set_count: number | null
-          id: string
-          last_goal_achieved_date: string | null
-          level: number | null
-          total_xp: number | null
-          updated_at: string
-          user_id: string
-        }
-        Insert: {
-          best_streak?: number | null
-          created_at?: string
-          current_streak?: number | null
-          goals_achieved_count?: number | null
-          goals_set_count?: number | null
-          id?: string
-          last_goal_achieved_date?: string | null
-          level?: number | null
-          total_xp?: number | null
-          updated_at?: string
-          user_id: string
-        }
-        Update: {
-          best_streak?: number | null
-          created_at?: string
-          current_streak?: number | null
-          goals_achieved_count?: number | null
-          goals_set_count?: number | null
-          id?: string
-          last_goal_achieved_date?: string | null
-          level?: number | null
-          total_xp?: number | null
-          updated_at?: string
+          theme?: string | null
+          updated_at?: string | null
           user_id?: string
         }
         Relationships: []
       }
       user_roles: {
         Row: {
-          created_at: string
+          assigned_at: string | null
+          assigned_by: string | null
           id: string
-          role: Database["public"]["Enums"]["app_role"]
+          role: Database["public"]["Enums"]["user_role"]
           user_id: string
         }
         Insert: {
-          created_at?: string
+          assigned_at?: string | null
+          assigned_by?: string | null
           id?: string
-          role: Database["public"]["Enums"]["app_role"]
+          role?: Database["public"]["Enums"]["user_role"]
           user_id: string
         }
         Update: {
-          created_at?: string
+          assigned_at?: string | null
+          assigned_by?: string | null
           id?: string
-          role?: Database["public"]["Enums"]["app_role"]
+          role?: Database["public"]["Enums"]["user_role"]
           user_id?: string
         }
         Relationships: []
       }
-      user_skills: {
+      yearly_revenue_targets: {
         Row: {
-          approved_at: string | null
-          approved_by: string | null
-          approver_comment: string | null
           created_at: string
+          created_by: string | null
           id: string
-          rating: string
-          self_comment: string | null
-          skill_id: string
-          status: string
-          submitted_at: string | null
-          subskill_id: string | null
+          total_target: number
           updated_at: string
-          user_id: string
+          year: number
         }
         Insert: {
-          approved_at?: string | null
-          approved_by?: string | null
-          approver_comment?: string | null
           created_at?: string
+          created_by?: string | null
           id?: string
-          rating: string
-          self_comment?: string | null
-          skill_id: string
-          status?: string
-          submitted_at?: string | null
-          subskill_id?: string | null
+          total_target?: number
           updated_at?: string
-          user_id: string
+          year: number
         }
         Update: {
-          approved_at?: string | null
-          approved_by?: string | null
-          approver_comment?: string | null
           created_at?: string
+          created_by?: string | null
           id?: string
-          rating?: string
-          self_comment?: string | null
-          skill_id?: string
-          status?: string
-          submitted_at?: string | null
-          subskill_id?: string | null
+          total_target?: number
           updated_at?: string
-          user_id?: string
+          year?: number
         }
-        Relationships: [
-          {
-            foreignKeyName: "user_skills_skill_id_fkey"
-            columns: ["skill_id"]
-            isOneToOne: false
-            referencedRelation: "skills"
-            referencedColumns: ["id"]
-          },
-          {
-            foreignKeyName: "user_skills_subskill_id_fkey"
-            columns: ["subskill_id"]
-            isOneToOne: false
-            referencedRelation: "subskills"
-            referencedColumns: ["id"]
-          },
-        ]
+        Relationships: []
       }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      calculate_goal_progress: {
-        Args: { current_rating_param: string; target_rating_param: string }
-        Returns: number
-      }
-      calculate_next_upgrade_date: {
-        Args: { approved_at_param: string }
-        Returns: string
-      }
-      can_upgrade_rating: {
+      get_user_role: { Args: { p_user_id: string }; Returns: string }
+      is_current_user_admin: { Args: never; Returns: boolean }
+      is_current_user_admin_by_metadata: { Args: never; Returns: boolean }
+      is_user_admin: { Args: { user_id?: string }; Returns: boolean }
+      log_data_access: {
         Args: {
-          approved_at_param: string
-          current_rating_param: string
-          current_status_param: string
-          target_rating_param: string
-        }
-        Returns: boolean
-      }
-      cleanup_old_notifications: { Args: never; Returns: undefined }
-      get_current_user_role: { Args: never; Returns: string }
-      get_my_tech_lead_id: { Args: never; Returns: string }
-      has_role: {
-        Args: {
-          _role: Database["public"]["Enums"]["app_role"]
-          _user_id: string
-        }
-        Returns: boolean
-      }
-      send_goal_reminders: { Args: never; Returns: undefined }
-      test_employee_rating_insert: {
-        Args: {
-          p_rating: string
-          p_skill_id: string
-          p_subskill_id: string
-          p_user_id: string
+          p_operation: string
+          p_record_id?: string
+          p_table_name: string
         }
         Returns: undefined
       }
-      update_leaderboard_history: { Args: never; Returns: undefined }
+      log_security_event: {
+        Args: {
+          p_action: string
+          p_details?: Json
+          p_resource_id?: string
+          p_resource_type: string
+        }
+        Returns: undefined
+      }
+      update_user_role: {
+        Args: { p_role: string; p_user_id: string }
+        Returns: undefined
+      }
     }
     Enums: {
-      app_role: "employee" | "tech_lead" | "management" | "admin"
+      user_role: "admin" | "manager" | "user"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -1327,7 +773,7 @@ export type CompositeTypes<
 export const Constants = {
   public: {
     Enums: {
-      app_role: ["employee", "tech_lead", "management", "admin"],
+      user_role: ["admin", "manager", "user"],
     },
   },
 } as const
