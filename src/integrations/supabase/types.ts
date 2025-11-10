@@ -10,7 +10,7 @@ export type Database = {
   // Allows to automatically instantiate createClient with right options
   // instead of createClient<Database, { PostgrestVersion: 'XX' }>(URL, KEY)
   __InternalSupabase: {
-    PostgrestVersion: "13.0.4"
+    PostgrestVersion: "13.0.5"
   }
   public: {
     Tables: {
@@ -295,6 +295,24 @@ export type Database = {
         }
         Relationships: []
       }
+      keep_alive: {
+        Row: {
+          "Able to read DB": string | null
+          created_at: string
+          id: number
+        }
+        Insert: {
+          "Able to read DB"?: string | null
+          created_at?: string
+          id?: number
+        }
+        Update: {
+          "Able to read DB"?: string | null
+          created_at?: string
+          id?: number
+        }
+        Relationships: []
+      }
       lead_action_items: {
         Row: {
           assigned_to: string | null
@@ -490,7 +508,7 @@ export type Database = {
           created_at: string | null
           details: Json | null
           id: string
-          ip_address: unknown | null
+          ip_address: unknown
           resource_id: string | null
           resource_type: string
           user_agent: string | null
@@ -501,7 +519,7 @@ export type Database = {
           created_at?: string | null
           details?: Json | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type: string
           user_agent?: string | null
@@ -512,7 +530,7 @@ export type Database = {
           created_at?: string | null
           details?: Json | null
           id?: string
-          ip_address?: unknown | null
+          ip_address?: unknown
           resource_id?: string | null
           resource_type?: string
           user_agent?: string | null
@@ -600,22 +618,10 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      get_user_role: {
-        Args: { p_user_id: string }
-        Returns: string
-      }
-      is_current_user_admin: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-      is_current_user_admin_by_metadata: {
-        Args: Record<PropertyKey, never>
-        Returns: boolean
-      }
-      is_user_admin: {
-        Args: { user_id?: string }
-        Returns: boolean
-      }
+      get_user_role: { Args: { p_user_id: string }; Returns: string }
+      is_current_user_admin: { Args: never; Returns: boolean }
+      is_current_user_admin_by_metadata: { Args: never; Returns: boolean }
+      is_user_admin: { Args: { user_id?: string }; Returns: boolean }
       log_data_access: {
         Args: {
           p_operation: string
