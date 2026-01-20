@@ -15,6 +15,12 @@ interface SecurityEvent {
   severity: 'low' | 'medium' | 'high' | 'critical';
 }
 
+interface SecurityResult {
+  severity: 'low' | 'medium' | 'high' | 'critical';
+  alert?: string;
+  action_required?: string;
+}
+
 serve(async (req) => {
   // Handle CORS preflight requests
   if (req.method === 'OPTIONS') {
@@ -105,7 +111,7 @@ serve(async (req) => {
 
     // Process security event
     const checkFunction = securityChecks[action as keyof typeof securityChecks]
-    let securityResult = { severity: 'low' as const }
+    let securityResult: SecurityResult = { severity: 'low' }
     
     if (checkFunction) {
       securityResult = await checkFunction(details)
@@ -158,9 +164,10 @@ serve(async (req) => {
     )
 
   } catch (error) {
+    const errorMessage = error instanceof Error ? error.message : 'Unknown error';
     console.error('Security monitoring error:', error)
     return new Response(
-      JSON.stringify({ error: error.message }),
+      JSON.stringify({ error: errorMessage }),
       {
         headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         status: 400,
