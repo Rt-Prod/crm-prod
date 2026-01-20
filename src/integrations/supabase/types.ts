@@ -300,16 +300,19 @@ export type Database = {
           "Able to read DB": string | null
           created_at: string
           id: number
+          last_ping: string | null
         }
         Insert: {
           "Able to read DB"?: string | null
           created_at?: string
           id?: number
+          last_ping?: string | null
         }
         Update: {
           "Able to read DB"?: string | null
           created_at?: string
           id?: number
+          last_ping?: string | null
         }
         Relationships: []
       }
